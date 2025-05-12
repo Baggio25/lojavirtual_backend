@@ -1,5 +1,7 @@
 package com.baggio.projeto.lojavirtual.model;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,12 +20,20 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Acesso {
+public class Acesso implements GrantedAuthority{
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_ACESSO")
     private Long id;
 
+    /**
+     * Ex.: ROLE_ADMIN, ROLE_OPERADOR
+     */
     private String descricao;
+
+    @Override
+    public String getAuthority() {
+        return this.descricao;
+    }
 
 }
