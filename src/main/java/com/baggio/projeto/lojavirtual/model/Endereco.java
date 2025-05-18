@@ -1,10 +1,20 @@
 package com.baggio.projeto.lojavirtual.model;
 
+
+import java.util.HashSet;
+import java.util.Set;
+
+import com.baggio.projeto.lojavirtual.model.enums.TipoEndereco;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -34,8 +44,15 @@ public class Endereco {
     private String uf;
     private String cidade;
 
-    @ManyToOne
-    @JoinColumn(name = "pessoa_id", nullable = false)
-    private Pessoa pessoa;
+    @Column(name = "tipo_endereco")
+    @Enumerated(EnumType.STRING)
+    private TipoEndereco tipoEndereco;
 
+    @ManyToOne
+    @JoinColumn(name = "id_pessoa_fisica")
+    private PessoaFisica pessoaFisica;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_pessoa_juridica")
+    private PessoaJuridica pessoaJuridica;
 }

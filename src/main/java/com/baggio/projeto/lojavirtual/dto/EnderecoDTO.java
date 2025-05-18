@@ -1,6 +1,7 @@
 package com.baggio.projeto.lojavirtual.dto;
 
 import com.baggio.projeto.lojavirtual.model.Endereco;
+import com.baggio.projeto.lojavirtual.model.enums.TipoEndereco;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -35,8 +36,8 @@ public class EnderecoDTO {
     @NotBlank(message = "A [cidade] é obrigatória")
     private String cidade;
     
-    @NotBlank(message = "O [pessoaId] é obrigatório")
-    private Long pessoaId;
+    @NotBlank(message = "O [tipoEndereco] é obrigatório")
+    private String tipoEndereco;
 
     public EnderecoDTO(Endereco endereco) {
         this.id = endereco.getId();
@@ -47,6 +48,6 @@ public class EnderecoDTO {
         this.bairro = endereco.getBairro();
         this.uf = endereco.getUf();
         this.cidade = endereco.getCidade();
-        this.pessoaId = endereco.getPessoa().getId();
+        this.tipoEndereco = endereco.getTipoEndereco().name();
     }
 }
